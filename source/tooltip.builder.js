@@ -203,6 +203,7 @@ module.exports = class plugin_setting {
          *
          * @param id ID
          * @param desc デスクリプション
+         * @param memo メモ
          * @since 2024/01/15
          * @author Kei Yusu
          * 
@@ -227,10 +228,7 @@ module.exports = class plugin_setting {
                 
                 header: function(e){
 
-                    const id = e.data.pm.id || "";
-                    const desc = e.data.pm.desc || "";
-                    
-                    return `${id} ${desc}`;
+                    return e.data.pm.memo || ""
 
                 },
 
@@ -285,6 +283,26 @@ module.exports = class plugin_setting {
                         */
                         onChange : function(val, component) {
                             TB.component.changeParam(component, "desc", val);
+                        }
+    
+                    },
+
+                    // ツールチップメモ
+                    "memo" : {
+                        type : "Text",
+                        name : TB.$.s("メモ"),
+                        help : TB.$.s("メモ欄です。ご自由にお使いください。"),
+                        validate : {
+                            required : false,
+                        },
+
+                        /*
+                            onChangeメソッド 
+                            テキストが変更されたタイミングで、手動でパラメータを設定する必要があります。
+                            Textの場合は必須です。
+                        */
+                        onChange : function(val, component) {
+                            TB.component.changeParam(component, "memo", val);
                         }
     
                     },

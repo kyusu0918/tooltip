@@ -90,6 +90,7 @@
    *
    * @param id ID
    * @param desc ツールチップ説明文
+   * @param memo メモ
    * @since 2024/01/13
    * @author Kei Yusu
    * 
@@ -99,6 +100,7 @@
     vital: ["id"],
     pm: {
       desc: "",
+      memo: "",
     },
     start : function(pm) {
 
@@ -119,6 +121,9 @@
         // ツールチップ説明文更新
         tooltip_data.desc = pm.desc;
 
+        // ツールチップメモ更新
+        tooltip_data.memo = pm.memo;
+
       // ツールチップデータない場合
       }else{
 
@@ -126,6 +131,7 @@
         const tooltip_data = {
           id: pm.id,
           desc: pm.desc,
+          memo: pm.memo,
         }
 
         // ツールチップデータ追加
