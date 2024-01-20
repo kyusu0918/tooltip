@@ -174,6 +174,46 @@ module.exports = class plugin_setting {
                         help : TB.$.s("ツールチップの背景カラーを設定してください。"),
                     },
                     
+                    // ツールチップ高さ
+                    "desc_height" : {
+                        type : "Text",
+                        name : TB.$.s("ツールチップ高さ（省略時は自動調整）"),
+                        help : TB.$.s("ツールチップの高さを設定してください。省略時は自動調整"),
+                        validate : {
+                            required : false,
+                        },
+
+                        /*
+                            onChangeメソッド 
+                            テキストが変更されたタイミングで、手動でパラメータを設定する必要があります。
+                            Textの場合は必須です。
+                        */
+                        onChange : function(val, component) {
+                            TB.component.changeParam(component, "desc_height", val);
+                        }
+    
+                    },
+
+                    // ツールチップ幅
+                    "desc_width" : {
+                        type : "Text",
+                        name : TB.$.s("ツールチップ幅（省略時は自動調整）"),
+                        help : TB.$.s("ツールチップの幅を設定してください。省略時は自動調整"),
+                        validate : {
+                            required : false,
+                        },
+
+                        /*
+                            onChangeメソッド 
+                            テキストが変更されたタイミングで、手動でパラメータを設定する必要があります。
+                            Textの場合は必須です。
+                        */
+                        onChange : function(val, component) {
+                            TB.component.changeParam(component, "desc_width", val);
+                        }
+    
+                    },
+
                 },
                 
                 /*

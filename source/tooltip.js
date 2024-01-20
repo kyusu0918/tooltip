@@ -15,6 +15,8 @@
    * @param desc_fontsize ツールチップフォントサイズ
    * @param desc_color ツールチップフォントカラー
    * @param desc_backcolor ツールチップ背景カラー
+   * @param desc_height ツールチップ高さ
+   * @param desc_width ツールチップ幅
    * @since 2024/01/13
    * @author Kei Yusu
    * 
@@ -28,6 +30,8 @@
       desc_fontsize: 0, 
       desc_color: "",
       desc_backcolor: "",
+      desc_height: "",
+      desc_width: "",
     },
     start : function(pm) {
 
@@ -71,6 +75,22 @@
 
         // ツールチップ背景カラー設定
         TYRANO.kag.variable.sf.tooltip_config.desc_backcolor = $.convertColor(pm.desc_backcolor);
+
+      }
+
+      // ツールチップ高さが省略されていない場合
+      if(pm.desc_height){
+
+        // ツールチップ高さ設定
+        TYRANO.kag.variable.sf.tooltip_config.desc_height = pm.desc_height;
+
+      }
+
+      // ツールチップ幅が省略されていない場合
+      if(pm.desc_width){
+
+        // ツールチップ幅設定
+        TYRANO.kag.variable.sf.tooltip_config.desc_width = pm.desc_width;
 
       }
 
@@ -243,6 +263,8 @@
    * @param desc_fontsize ツールチップフォントサイズ
    * @param desc_color ツールチップフォントカラー
    * @param desc_backcolor ツールチップ背景カラー
+   * @param desc_height ツールチップ高さ
+   * @param desc_width ツールチップ幅
    * @since 2024/01/13
    * @author Kei Yusu
    * 
@@ -258,6 +280,8 @@
       desc_fontsize: 0, 
       desc_color: "",
       desc_backcolor: "",
+      desc_height: "",
+      desc_width: "",
     },
     start : function(pm) {
 
@@ -288,6 +312,12 @@
 
         // ツールチップ背景カラー取得
         const desc_backcolor = $.convertColor(pm.desc_backcolor) || TYRANO.kag.variable.sf.tooltip_config.desc_backcolor;
+
+        // ツールチップ高さ取得
+        const desc_height = pm.desc_height || TYRANO.kag.variable.sf.tooltip_config.desc_height;
+
+        // ツールチップ幅取得
+        const desc_width = pm.desc_width || TYRANO.kag.variable.sf.tooltip_config.desc_width;
 
         //--------------------------------------------------------------------------------
         // テキスト用Span設定
@@ -352,6 +382,26 @@
           spanDesc.css({
             "background": `${desc_backcolor}`,
             "border-color": `${desc_backcolor}`,
+          });
+
+        }
+
+        // ツールチップ高さが指定されている場合
+        if(desc_height){
+          
+          // ツールチップ高さ設定
+          spanDesc.css({
+            "height": `${desc_height}`
+          });
+
+        }
+
+        // ツールチップ幅が指定されている場合
+        if(desc_width){
+          
+          // ツールチップ幅設定
+          spanDesc.css({
+            "width": `${desc_width}`
           });
 
         }
@@ -429,6 +479,8 @@
         desc_fontsize: 12,
         desc_color: "white",
         desc_backcolor: "gray",
+        desc_height: "",
+        desc_width: "",
       }
 
       // コンフィグオブジェクト設定
