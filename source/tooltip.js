@@ -632,7 +632,7 @@
     // バックログ停止中の場合は終了
     if(TYRANO.kag.stat.log_write == false) return;
 
-    // ルビ対象テキストの前後のバックログを取得
+    // ツールチップ対象テキストの前後のバックログを取得
     const backlogs = [
       TYRANO.kag.variable.tf.system.backlog[TYRANO.kag.variable.tf.system.backlog.length-3],
       TYRANO.kag.variable.tf.system.backlog[TYRANO.kag.variable.tf.system.backlog.length-2],
