@@ -1,7 +1,7 @@
 /********************************************************************************
- * ツールチップティラノスクリプトプラグイン ver1.1.0
+ * ツールチップティラノスクリプトプラグイン ver1.1.1
  *
- * @since 2024/01/13
+ * @since 2026/01/27
  * @author Kei Yusu
  *
  *********************************************************************************/
@@ -126,10 +126,10 @@
 
       // ストア配列がない場合
       if(TYRANO.kag.variable.sf.tooltip_store == undefined){
-  
+
         // ストア配列作成
         TYRANO.kag.variable.sf.tooltip_store = [];
-        
+
       }
 
       // ツールチップデータ取得
@@ -448,7 +448,7 @@
   /********************************************************************************
    * ツールチップ終了タグ作成
    *
-   * @since 2024/01/13
+   * @since 2026/01/27
    * @author Kei Yusu
    * 
    *********************************************************************************/
@@ -459,7 +459,11 @@
     start : function(pm) {
 
       // カレントSpan設定
-      TYRANO.kag.setMessageCurrentSpan();
+      const spanText = TYRANO.kag.setMessageCurrentSpan();
+
+      // 先頭文字回避のためにダミーを追加
+      const dummy = $(`<span class="tooltip_dummy" style="display:none;">\u200B</span>`);
+      spanText.append(dummy);
 
       // フォントカラーがキャッシュされていた場合
       if(TYRANO.kag.variable.tf.tooltip_config_cache_font_color){
@@ -471,6 +475,9 @@
 
       // 次のタグへ
       this.kag.ftag.nextOrder();
+
+      // ダミーを削除
+      dummy.remove();
 
       // バックログ調整
       adjustBackLog();
