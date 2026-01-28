@@ -6,6 +6,7 @@
 	position: relative;
 	cursor: pointer;
 	display: inline-block;
+	color: var(--tooltip-text-color, inherit) !important;
 }
 
 /********************************************************************************

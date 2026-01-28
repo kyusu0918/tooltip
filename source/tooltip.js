@@ -1,7 +1,7 @@
 /********************************************************************************
- * ツールチップティラノスクリプトプラグイン ver1.1.1
+ * ツールチップティラノスクリプトプラグイン ver1.2.0
  *
- * @since 2026/01/27
+ * @since 2026/01/28
  * @author Kei Yusu
  *
  *********************************************************************************/
@@ -265,7 +265,7 @@
    * @param desc_backcolor ツールチップ背景カラー
    * @param desc_height ツールチップ高さ
    * @param desc_width ツールチップ幅
-   * @since 2024/01/13
+   * @since 2026/01/28
    * @author Kei Yusu
    * 
    *********************************************************************************/
@@ -323,24 +323,28 @@
         // テキスト用Span設定
         //--------------------------------------------------------------------------------
         // フォントカラーキャッシュの初期値を設定
-        TYRANO.kag.variable.tf.tooltip_config_cache_font_color = "";
+        // ※既読テキスト対策のため、CSSでのカラー設定へ変更したためコメントアウト
+        // TYRANO.kag.variable.tf.tooltip_config_cache_font_color = "";
 
         // テキストカラーが指定されている場合
-        if(text_color){
+        // if(text_color){
 
           // 現在のフォントカラーをキャッシュ
-          TYRANO.kag.variable.tf.tooltip_config_cache_font_color = TYRANO.kag.stat.font.color;
+          // TYRANO.kag.variable.tf.tooltip_config_cache_font_color = TYRANO.kag.stat.font.color;
 
           // テキストカラー設定
-          TYRANO.kag.stat.font.color = text_color;
+          // TYRANO.kag.stat.font.color = text_color;
           
-        }
+        // }
 
         // テキスト用Span取得
         const spanText = TYRANO.kag.setMessageCurrentSpan();
 
         // テキスト用Spanにtooltipクラスを設定
         spanText.addClass("tooltip");
+
+        // ツールチップテキストカラー設定
+        spanText.css("--tooltip-text-color", text_color);
 
         // テキスト用Spanにツールチップ説明文用を設定
         // ※イベントのセンダーオブジェクトを経由してツールチップ説明文を使用する場合は設定する
@@ -448,7 +452,7 @@
   /********************************************************************************
    * ツールチップ終了タグ作成
    *
-   * @since 2026/01/27
+   * @since 2026/01/28
    * @author Kei Yusu
    * 
    *********************************************************************************/
@@ -466,12 +470,13 @@
       spanText.append(dummy);
 
       // フォントカラーがキャッシュされていた場合
-      if(TYRANO.kag.variable.tf.tooltip_config_cache_font_color){
+      // ※既読テキスト対策のため、CSSでのカラー設定へ変更したためコメントアウト
+      // if(TYRANO.kag.variable.tf.tooltip_config_cache_font_color){
 
         // テキストカラー設定（元に戻す）
-        TYRANO.kag.stat.font.color = TYRANO.kag.variable.tf.tooltip_config_cache_font_color;
+        // TYRANO.kag.stat.font.color = TYRANO.kag.variable.tf.tooltip_config_cache_font_color;
 
-      }
+      // }
 
       // 次のタグへ
       this.kag.ftag.nextOrder();
