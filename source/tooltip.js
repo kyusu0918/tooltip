@@ -1,7 +1,7 @@
 /********************************************************************************
- * ツールチップティラノスクリプトプラグイン ver1.2.0
+ * ツールチップティラノスクリプトプラグイン ver1.3.0
  *
- * @since 2026/01/28
+ * @since 2026/09/17
  * @author Kei Yusu
  *
  *********************************************************************************/
@@ -265,13 +265,14 @@
    * @param desc_backcolor ツールチップ背景カラー
    * @param desc_height ツールチップ高さ
    * @param desc_width ツールチップ幅
-   * @since 2026/01/28
+   * @since 2026/09/17
    * @author Kei Yusu
    * 
    *********************************************************************************/
   const tooltip = {
     kag: TYRANO.kag,
     vital: [],
+    log_join: "true",
     pm: {
       id: "",
       text_color: "",
@@ -416,25 +417,26 @@
         // テキスト用Spanにツールチップ説明文用spanを追加
         spanText.append(spanDesc);
 
-        //--------------------------------------------------------------------------------
-        // バックログ調整用設定
-        //--------------------------------------------------------------------------------
-        // 直前のエレメントを取得
-        const prevElem = spanText.prev();
+        // log_join: "true", の方式へ変更したためコメントアウト
+        // //--------------------------------------------------------------------------------
+        // // バックログ調整用設定
+        // //--------------------------------------------------------------------------------
+        // // 直前のエレメントを取得
+        // const prevElem = spanText.prev();
 
-        // 直前のエレメントが空白でなく、テキスト用Spanが同一階層の場合
-        if(prevElem.length && prevElem.text() != "" && prevElem.parent().is(spanText.parent())){
+        // // 直前のエレメントが空白でなく、テキスト用Spanが同一階層の場合
+        // if(prevElem.length && prevElem.text() != "" && prevElem.parent().is(spanText.parent())){
 
-          // 行頭フラグをキャッシュ（行頭でない）
-          TYRANO.kag.variable.tf.tooltip_config_cache_is_head = false;
+        //   // 行頭フラグをキャッシュ（行頭でない）
+        //   TYRANO.kag.variable.tf.tooltip_config_cache_is_head = false;
 
-        // 上記以外の場合（行頭の場合）
-        }else{
+        // // 上記以外の場合（行頭の場合）
+        // }else{
 
-          // 行頭フラグをキャッシュ（行頭）
-          TYRANO.kag.variable.tf.tooltip_config_cache_is_head = true;
+        //   // 行頭フラグをキャッシュ（行頭）
+        //   TYRANO.kag.variable.tf.tooltip_config_cache_is_head = true;
 
-        }
+        // }
 
       }
             
@@ -452,13 +454,14 @@
   /********************************************************************************
    * ツールチップ終了タグ作成
    *
-   * @since 2026/01/28
+   * @since 2026/09/17
    * @author Kei Yusu
    * 
    *********************************************************************************/
   const end_tooltip = {
     kag: TYRANO.kag,
     vital: [],
+    log_join: "true",
     pm: {},
     start : function(pm) {
 
@@ -485,7 +488,8 @@
       dummy.remove();
 
       // バックログ調整
-      adjustBackLog();
+      // log_join: "true", の方式へ変更したためコメントアウト
+      // adjustBackLog();
 
       // キャッシュクリア
       TYRANO.kag.variable.tf.tooltip_config_cache_is_head = undefined;
@@ -624,105 +628,107 @@
 
   /********************************************************************************
    * バックログ調整
+   * 
+   * ※log_join: "true", の方式へ変更したためコメントアウト
    *
    * @since 2024/11/13
    * @author Kei Yusu
    * 
    *********************************************************************************/
-  const adjustBackLog = () => {
+  // const adjustBackLog = () => {
 
-    // バックログを使用しない場合は終了
-    if(TYRANO.kag.config.maxBackLogNum == 0) return;
+  //   // バックログを使用しない場合は終了
+  //   if(TYRANO.kag.config.maxBackLogNum == 0) return;
 
-    // バックログ停止中の場合は終了
-    if(TYRANO.kag.stat.log_write == false) return;
+  //   // バックログ停止中の場合は終了
+  //   if(TYRANO.kag.stat.log_write == false) return;
 
-    // ツールチップ対象テキストの前後のバックログを取得
-    const backlogs = [
-      TYRANO.kag.variable.tf.system.backlog[TYRANO.kag.variable.tf.system.backlog.length-3],
-      TYRANO.kag.variable.tf.system.backlog[TYRANO.kag.variable.tf.system.backlog.length-2],
-      TYRANO.kag.variable.tf.system.backlog[TYRANO.kag.variable.tf.system.backlog.length-1]
-    ]
+  //   // ツールチップ対象テキストの前後のバックログを取得
+  //   const backlogs = [
+  //     TYRANO.kag.variable.tf.system.backlog[TYRANO.kag.variable.tf.system.backlog.length-3],
+  //     TYRANO.kag.variable.tf.system.backlog[TYRANO.kag.variable.tf.system.backlog.length-2],
+  //     TYRANO.kag.variable.tf.system.backlog[TYRANO.kag.variable.tf.system.backlog.length-1]
+  //   ]
 
-    // 取得したバックログ数文ループ
-    const joinBackLog = backlogs.reduce((accum, it, index) => {
+  //   // 取得したバックログ数文ループ
+  //   const joinBackLog = backlogs.reduce((accum, it, index) => {
 
-      // インデックスを判断
-      switch(index){
+  //     // インデックスを判断
+  //     switch(index){
 
-        // ツールチップ対象テキストの前の場合
-        case 0:
+  //       // ツールチップ対象テキストの前の場合
+  //       case 0:
 
-          // 行頭でない場合
-          if(TYRANO.kag.variable.tf.tooltip_config_cache_is_head == false){
+  //         // 行頭でない場合
+  //         if(TYRANO.kag.variable.tf.tooltip_config_cache_is_head == false){
 
-            // ログ取得
-            accum += it;
+  //           // ログ取得
+  //           accum += it;
 
-          }
+  //         }
 
-          // 終了
-          break;
+  //         // 終了
+  //         break;
 
-        // ツールチップ対象テキストの場合
-        case 1:
+  //       // ツールチップ対象テキストの場合
+  //       case 1:
 
-          // 行頭の場合
-          if(TYRANO.kag.variable.tf.tooltip_config_cache_is_head == true){
+  //         // 行頭の場合
+  //         if(TYRANO.kag.variable.tf.tooltip_config_cache_is_head == true){
 
-            // ログ取得
-            accum += it;
+  //           // ログ取得
+  //           accum += it;
 
-          // 行頭でない場合
-          } else {
+  //         // 行頭でない場合
+  //         } else {
 
-            // キャラ名で分割
-            const logs = it.split("：");
+  //           // キャラ名で分割
+  //           const logs = it.split("：");
 
-            // ログ取得
-            accum += logs.length >= 2 ? logs[1] : it;
+  //           // ログ取得
+  //           accum += logs.length >= 2 ? logs[1] : it;
 
-          }
+  //         }
 
-          // 終了
-          break;
+  //         // 終了
+  //         break;
 
-        // ツールチップ対象テキストの後ろの場合
-        case 2:
+  //       // ツールチップ対象テキストの後ろの場合
+  //       case 2:
 
-          // キャラ名で分割
-          const logs = it.split("：");
+  //         // キャラ名で分割
+  //         const logs = it.split("：");
 
-          // ログ取得
-          accum += logs.length >= 2 ? logs[1] : it;
+  //         // ログ取得
+  //         accum += logs.length >= 2 ? logs[1] : it;
 
-          // 終了
-          break;
+  //         // 終了
+  //         break;
 
-      }
+  //     }
 
-      // 戻り値の設定
-      return accum;
+  //     // 戻り値の設定
+  //     return accum;
 
-    }, "");
+  //   }, "");
 
-    // 行頭フラグを判断（行頭の場合）
-    if(TYRANO.kag.variable.tf.tooltip_config_cache_is_head == true){
+  //   // 行頭フラグを判断（行頭の場合）
+  //   if(TYRANO.kag.variable.tf.tooltip_config_cache_is_head == true){
 
-      // 改行付バックログを削除
-      TYRANO.kag.variable.tf.system.backlog.splice(TYRANO.kag.variable.tf.system.backlog.length - 2, 2);
+  //     // 改行付バックログを削除
+  //     TYRANO.kag.variable.tf.system.backlog.splice(TYRANO.kag.variable.tf.system.backlog.length - 2, 2);
 
-    // 行頭でない場合
-    } else {
+  //   // 行頭でない場合
+  //   } else {
 
-      // 改行付バックログを削除
-      TYRANO.kag.variable.tf.system.backlog.splice(TYRANO.kag.variable.tf.system.backlog.length - 3, 3);
+  //     // 改行付バックログを削除
+  //     TYRANO.kag.variable.tf.system.backlog.splice(TYRANO.kag.variable.tf.system.backlog.length - 3, 3);
 
-    }
+  //   }
 
-    // 改行を削除したバックログを追加
-    TYRANO.kag.variable.tf.system.backlog.push(joinBackLog);
+  //   // 改行を削除したバックログを追加
+  //   TYRANO.kag.variable.tf.system.backlog.push(joinBackLog);
 
-  }
+  // }
 
 })();
