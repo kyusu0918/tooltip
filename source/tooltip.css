@@ -258,3 +258,12 @@
 .message_inner p span.tooltip {
 	z-index:99999;
 }
+
+/* メッセージ p span.desc_top/desc_bottom/desc_left/desc_right */
+/* .message_inner p span（詳細度0,1,2）より確実に勝つよう、同じ構造+クラスで上書きする */
+.message_inner p span.desc_top,
+.message_inner p span.desc_bottom,
+.message_inner p span.desc_left,
+.message_inner p span.desc_right {
+	z-index:100000;
+}
